@@ -11,7 +11,7 @@ on:
   issues:
     types:
       -labeled
-  workflow-displatch:
+  workflow-dispatch:
     inputs: 
       favorite_language: 
         description: "inpurt language"
@@ -41,6 +41,7 @@ jobs:
     - name: Correr script
       run: node language.js
   hola-mundo:
+    if: ${{ github.event_name != 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
