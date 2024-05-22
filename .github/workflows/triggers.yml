@@ -18,7 +18,7 @@ on:
         requeried: true
         type: choice
         options: [Python, Javascript, Go]
-      name: "input name"
+      name:
         description: "optional description"
         required: true
         default: Ulises
