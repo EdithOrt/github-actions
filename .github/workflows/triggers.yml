@@ -1,0 +1,48 @@
+name: Triggers - Second workflow
+run-name: Ejemplo de 3 triggers
+on: 
+  push:
+    branches: 
+      - main
+  pull-request:
+    types: [opened, sinchronize, reopened]
+    paths: 
+      - "**.js"
+  issues:
+    types:
+      -labeled
+  workflow-displatch:
+    inputs: 
+      favorite_language: 
+        description: "inpurt language"
+        requeried: true
+        type: choice
+        options: [Python, Javascript, Go]
+      name: "input name"
+        description: "optional description"
+        required: true
+        default: Ulises
+        type: string
+    schedule:
+      - cron: '30 12 22 MAY *'
+jobs:
+  hola-mundo-manual:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Checkout
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4.0.2
+        with:
+        node-version: 20
+    - name: Definir nombre
+      run: echo "USERNAME=${{ inputs.name }}" >> $GITHUB_ENV
+    - name: Definir lenguaje
+      run: echo "LANGUAGE=${{ inputs.favorite_language }}" >> $GITHUB_ENV
+    - name: Correr script
+      run: node language.js
+  hola-mundo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run main.js
+        run: node main.js
